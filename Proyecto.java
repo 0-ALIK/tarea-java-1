@@ -82,7 +82,8 @@ class Game extends Dado
 
     public String jugada(Jugador p1, Jugador p2) {
 
-        p1.setPuntosEnJuego(jugada(p1, p2));
+        p1.setPuntosEnJuego(lanzarDado(p1));
+        p2.setPuntosEnJuego(lanzarDado(p2));
 
         return "";
     }
