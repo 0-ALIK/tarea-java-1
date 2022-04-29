@@ -1,0 +1,66 @@
+Puesto de limonada del niño
+- Limonadad sin azucar: 0.45 $
+- Limonadad con azucar: 0.5 $
+
+===========================================
+Cantidad de vasos: 100 
+Cantidad de cucharadas de azucar: 80
+Consumo de limonada con azucar: [1, 3] cucharadas de azucar
+
+===========================================
+SinAzucar
+    Atributos
+        entero vasos
+        double dinero
+    Métodos
+        getVasos() => vasos ,
+        getDinero() => dinero ,
+        calcularPrecio(vasosComprados) {
+            if(vasosComprados > vasos) 
+                return -1;
+
+            vasos -= vasosComprados;
+            dinero += 0.45 * vasosComprados;
+            return dinero; 
+        } ,
+        getVasosUsados () => 100 - vasos;
+
+ConAzucar
+    Atributos
+        entero azucar
+    Métodos
+        getAzucar() => azucar
+        getAzucarGastada() => 80 - azucar
+        calcularPrecioAzucar(vasosComprados, numAzucar) {
+            if((numAzucar*vasosComprados) > azucar)
+                return -2;
+            if(vasosComprados > vasos) {
+                return -1;     
+        
+            vasos -= vasosComprados;
+            azucar -= numAzucar;
+            dinero += 0.5 * vasosComprados;
+            return dinero;
+        }
+
+===========================================
+Menú
+1. Vender limonada sin azucar
+2. Vender limonada con azucar
+3. Ver registro de inventario
+4. Salir
+
+= 1. ======================================
+repite mientras: (vasos > 0, y si no se ingreso una cantidad correcta de basos)
+
+    quedan "n" basos para vender
+    Ingrese el número de vasos que comprara el cliente: 
+    si (calcularPrecio( leer ) == -1){
+        no hay vasos suficientes
+        continue;
+    }
+
+    break;
+
+fin bucle
+
