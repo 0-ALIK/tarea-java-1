@@ -25,13 +25,9 @@ class SinAzucar
     }
 
     public float calcularPrecio(int vasosComprados) {
-
-        if(vasosComprados > vasos)
-            return -1;
-        
         vasos -= vasosComprados;
-        dinero += 0.45 * vasosComprados;
-        return dinero;
+        dinero += (0.45 * vasosComprados);
+        return 0.45f * vasosComprados;
     }
 }
 
@@ -53,16 +49,11 @@ class ConAzucar extends SinAzucar
     }
 
     public float calcularPrecioAzucar(int vasosComprados, int numAzucar) {
-        
-        if(vasosComprados > numAzucar)
-            return -1;
-        if((vasosComprados * numAzucar) > azucar)
-            return -2;
-        
+            
         vasos -= vasosComprados;
-        azucar -= numAzucar;
+        azucar -= (numAzucar*vasosComprados);
         dinero += 0.5 * vasosComprados;
-        return dinero;
+        return 0.5f * vasosComprados;
     }
 }
 
@@ -75,6 +66,8 @@ public class Practica
 
         boolean active = true;
 
+        int cazucar, cvasos;
+
         ConAzucar venta = new ConAzucar();
 
         while(active)
@@ -83,6 +76,7 @@ public class Practica
 
             switch(Integer.parseInt(br.readLine())) {
 
+                //VENDER LIMONADA SIN AZUCAR
                 case 1:
                     if(venta.getVasos() <= 0)
                         System.out.print("\nYa no te quedan mas vasos para vender\n");
@@ -90,23 +84,60 @@ public class Practica
                         while(true) {
 
                             System.out.print("\nQuedan "+venta.getVasos()+" para vender");
+
                             System.out.print("\nIngrese el número de vasos que comprará el cliente: ");
-                            if(venta.calcularPrecio( Integer.parseInt(br.readLine())) == -1){
+                            cvasos = Integer.parseInt(br.readLine());
+
+                            if(cvasos > venta.getVasos()){
 
                                 System.out.print("\nNo hay vasos suficientes, ingrese una nueva cantidad");
                                 continue;
                             }
 
+                            System.out.print("\nEl precio por la compra del cliente es: "+venta.calcularPrecio(cvasos)+"$");
+
                             break;
                         }
                     }
-
                 break;
-
+                
+                //VENDER LIMONADA CON AZUCAR
                 case 2:
+                    if(venta.getVasos() <= 0)
+                        System.out.print("\nYa no te quedan mas vasos para vender\n");
+                    else if(venta.getAzucar() <= 0)
+                        System.out.print("\nYa no te quedan azucar para la limonadad con azucar\n");
+                    else{
+                        while(true) {
+
+                            System.out.print("\nQuedan "+venta.getVasos()+" vasos y "+venta.getAzucar()+" cucharadas de azucar para vender");
+
+                            System.out.print("\nIngrese el número de vasos que comprará el cliente: ");
+                            cvasos = Integer.parseInt(br.readLine());
+                            System.out.print("\nIngrese el cuantas cucharadas de azucar [1, 3] quiere el cliente: ");
+                            cazucar = Integer.parseInt(br.readLine());
+
+                            if(cvasos > venta.getVasos()){
+
+                                System.out.print("\nNo hay vasos suficientes, ingrese una nueva cantidad");
+                                continue;
+                            }
+                            if((cazucar*cvasos) > venta.getAzucar()){
+
+                                System.out.print("\nNo hay azucar suficientes, ingrese una nueva cantidad");
+                                continue;
+                            }
+
+                            System.out.print("\nEl precio por la compra del cliente es: "+venta.calcularPrecioAzucar(cvasos, cazucar)+"$");
+
+                            break;
+                        }
+                    }
                 break;
 
+                //MOSTRAR DATOS DE VENTAS
                 case 3:
+                    System.out.print("\nDinero: "+venta.getDinero()+"$\nVasos: "+venta.getVasos()+"\nAzucar: "+venta.getAzucar()+"\nVasos usados: "+venta.getVasosGastados()+"\nAzucar gastada: "+venta.getAzucarGastada()+"\n");
                 break;
 
                 case 4:
