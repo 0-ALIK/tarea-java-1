@@ -116,7 +116,12 @@ public class Practica
                             cvasos = Integer.parseInt(br.readLine());
                             System.out.print("\nIngrese el cuantas cucharadas de azucar [1, 3] quiere el cliente: ");
                             cazucar = Integer.parseInt(br.readLine());
+                            
+                            if(cazucar > 3) {
 
+                                System.out.print("\nEl máximo de cucharadas de azucar es 3, ingrese una nueva cantidad");
+                                continue;
+                            }
                             if(cvasos > venta.getVasos()){
 
                                 System.out.print("\nNo hay vasos suficientes, ingrese una nueva cantidad");
