@@ -1,21 +1,3 @@
-/*
-* Jugador
-    Atributos
-        nombre
-        puntosPartida
-        puntosTotales
-    Métodos
-        getNombre()
-        getPuntos()
-        getPuntosTotales()
-
-* Juego hereda de Jugador
-    Atributos
-        punto
-    Métodos
-        lanzarDado()
-*/
-
 import java.io.*;
 
 class Jugador
